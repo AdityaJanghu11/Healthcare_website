@@ -10,6 +10,9 @@ This AI based model can be helpful for the assistant present in the laboratories
 ![WhatsApp Image 2023-06-02 at 10 08 39 AM](https://github.com/The-Boysss/HealthCare-web/assets/90555965/d8cc0ad6-aaa6-4ee9-b177-33a1d45c711c)
 ![WhatsApp Image 2023-06-02 at 10 10 33 AM](https://github.com/The-Boysss/HealthCare-web/assets/90555965/7186b12f-c402-4aa4-ac4d-be57c9175a61)
 
+## API KEY 
+API KEY - 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
+
 
 
 
