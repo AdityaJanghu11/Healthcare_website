@@ -1,0 +1,64 @@
+def place_band(cube, start_pos, movements, band_id):
+    x, y, z = start_pos
+    cube[z][y][x] = band_id  # Place the starting position
+    for move in movements:
+        if move == 'u':
+            y -= 1
+        elif move == 'd':
+            y += 1
+        elif move == 'f':
+            z += 1
+        elif move == 'b':
+            z -= 1
+        elif move == 'r':
+            x += 1
+        elif move == 'l':
+            x -= 1
+        cube[z][y][x] = band_id  # Place the next position
+
+def count_cells_above(cube, band_id1, band_id2):
+    count1_above_2 = 0
+    count2_above_1 = 0
+    for z in range(len(cube)):
+        for y in range(len(cube[0])):
+            for x in range(len(cube[0][0])):
+                if cube[z][y][x] == band_id1:
+                    # Count how many cells of band 1 are above band 2
+                    for above_z in range(z + 1, len(cube)):
+                        if cube[above_z][y][x] == band_id2:
+                            count1_above_2 += 1
+                elif cube[z][y][x] == band_id2:
+                    # Count how many cells of band 2 are above band 1
+                    for above_z in range(z + 1, len(cube)):
+                        if cube[above_z][y][x] == band_id1:
+                            count2_above_1 += 1
+    return count1_above_2, count2_above_1
+
+def main():
+    S = int(input().strip())
+    start_pos1 = tuple(map(int, input().strip().split()))
+    movements1 = input().strip()
+    start_pos2 = tuple(map(int, input().strip().split()))
+    movements2 = input().strip()
+
+    # Initialize the cube
+    cube = [[[0 for _ in range(S)] for _ in range(S)] for _ in range(S)]
+
+    # Place the bands
+    place_band(cube, start_pos1, movements1, 1)
+    place_band(cube, start_pos2, movements2, 2)
+
+    # Check for interlocking
+    for z in range(S):
+        for y in range(S):
+            for x in range(S):
+                if cube[z][y][x] == 3:  # If both bands occupy the same cell
+                    print("Impossible")
+                    return
+
+    # Count cells above
+    count1_above_2, count2_above_1 = count_cells_above(cube, 1, 2)
+    print(max(count1_above_2, count2_above_1))
+
+if __name__ == "__main__":
+    main()
